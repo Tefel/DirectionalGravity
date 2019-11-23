@@ -3,7 +3,6 @@
 	"EngineAssociation": "4.23",
 	"Category": "",
 	"Description": "",
-	"Enterprise": true,
 	"Modules": [
 		{
 			"Name": "DirectionalGravity",
