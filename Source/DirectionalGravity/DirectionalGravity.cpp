@@ -3,4 +3,4 @@
 #include "DirectionalGravity.h"
 #include "Modules/ModuleManager.h"
 
-IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, DirectionalGravity, "DirectionalGravity" );\
+IMPLEMENT_PRIMARY_GAME_MODULE( FDefaultGameModuleImpl, DirectionalGravity, "DirectionalGravity" );
