@@ -287,7 +287,7 @@ void UGravityMovementComponent::PerformMovement(float DeltaTime)
 			}
 
 			// For local human clients, save off root motion data so it can be used by movement networking code.
-			if (CharacterOwner->IsLocallyControlled() && (CharacterOwner->Role == ROLE_AutonomousProxy) && CharacterOwner->IsPlayingNetworkedRootMotionMontage())
+			if (CharacterOwner->IsLocallyControlled() && (CharacterOwner->GetRemoteRole() == ROLE_AutonomousProxy) && CharacterOwner->IsPlayingNetworkedRootMotionMontage())
 			{
 				CharacterOwner->ClientRootMotionParams = RootMotionParams;
 			}
@@ -819,10 +819,10 @@ void UGravityMovementComponent::SimulateMovement(float DeltaTime)
 		return;
 	}
 
-	const bool bIsSimulatedProxy = (CharacterOwner->Role == ROLE_SimulatedProxy);
+	const bool bIsSimulatedProxy = (CharacterOwner->GetRemoteRole() == ROLE_SimulatedProxy);
 
 	// Workaround for replication not being updated initially.
-	if (bIsSimulatedProxy && CharacterOwner->ReplicatedMovement.Location.IsZero() && CharacterOwner->ReplicatedMovement.Rotation.IsZero() && CharacterOwner->ReplicatedMovement.LinearVelocity.IsZero())
+	if (bIsSimulatedProxy && CharacterOwner->GetReplicatedMovement().Location.IsZero() && CharacterOwner->GetReplicatedMovement().Rotation.IsZero() && CharacterOwner->GetReplicatedMovement().LinearVelocity.IsZero())
 	{
 		return;
 	}
@@ -2603,7 +2603,7 @@ void UGravityMovementComponent::UpdateComponentRotation()
 	const FVector DesiredCapsuleUp = GetComponentDesiredAxisZ();
 
 	// Abort if angle between new and old capsule 'up' axis almost equals to 0 degrees.
-	if ((DesiredCapsuleUp | GetCapsuleAxisZ()) >= THRESH_NORMALS_ARE_PARALLEL)
+	if ((DesiredCapsuleUp | GetCapsuleAxisZ()) >= THRESH_NORMALS_ARE_PARALLEL)				// TODO
 	{
 		return;
 	}
