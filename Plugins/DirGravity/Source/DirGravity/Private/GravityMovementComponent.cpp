@@ -2602,11 +2602,13 @@ void UGravityMovementComponent::UpdateComponentRotation()
 
 	const FVector DesiredCapsuleUp = GetComponentDesiredAxisZ();
 
+	// Commented out due to issues with big plannet and knowing snapping issues
+
 	// Abort if angle between new and old capsule 'up' axis almost equals to 0 degrees.
-	if ((DesiredCapsuleUp | GetCapsuleAxisZ()) >= THRESH_NORMALS_ARE_PARALLEL)				// TODO
-	{
-		return;
-	}
+	//if ((DesiredCapsuleUp | GetCapsuleAxisZ()) >= THRESH_NORMALS_ARE_PARALLEL)
+	//{
+	//	return;
+	//}
 
 	// Take desired Z rotation axis of capsule, try to keep current X rotation axis of capsule.
 	const FMatrix RotationMatrix = FRotationMatrix::MakeFromZX(DesiredCapsuleUp, GetCapsuleAxisX());
